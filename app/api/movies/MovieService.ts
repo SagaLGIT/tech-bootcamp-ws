@@ -1,27 +1,10 @@
 import {OmdbMovie} from "@/app/types/omdb/OmdbMovie";
 import {InternalMovie} from "@/app/api/movies/InternalMovie";
 import {omdbClient} from "@/app/api/movies/OmdbClient";
-import {Movie} from "@/app/types/Movie";
-import {OmdbSearchResponse} from "@/app/types/omdb/OmdbSearchResponse";
 import {movieRepository} from "@/app/api/movies/MovieRepository";
 import { MovieEntity } from "@prisma/client";
-import {favoriteService} from "@/app/api/users/[userId]/favorites/FavoriteService";
 
 export class MovieService {
-
-    async searchByTitle(title: string, userId: string): Promise<Movie[]> {
-        const response: OmdbSearchResponse = await omdbClient.searchByTitle(title);
-        const omdbMovies: OmdbMovie[] = response.Search;
-        if (!omdbMovies) {
-            return [];
-        }
-        const movieDtos: Movie[] = await Promise.all(omdbMovies.map(async (omdbMovie) => {
-            const movie: InternalMovie = InternalMovie.fromOmdbMovie(omdbMovie);
-            const isFavorite: boolean = await favoriteService.isFavorite(userId, movie.imdbId!);
-            return movie.toDto(isFavorite);
-        }));
-        return movieDtos;
-    }
 
     async getOrCreateMovie(imdbId: string): Promise<InternalMovie> {
         const movieEntity: MovieEntity | null = await movieRepository.findByImdbId(imdbId);
