@@ -73,7 +73,7 @@ Your password will be given to you during the workshop.
 # DB CONNECTION
 DATABASE_URL=postgresql://<your-firstname>.<first-letter-of-your-last-name>:<password>@34.38.7.50:5432/postgres
 ```
-To test your database connection, you can run Visma Studio with the command:
+To test your database connection, you can run Prisma Studio with the command:
 ```bash
 npx prisma studio
 ```
