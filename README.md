@@ -9,10 +9,9 @@
 To easily follow this Workshop and README file, the README is structured according to a few conventions.
 
 - Code and file names are written like `CodeExample`.
-- Larger code parts are written as below, with the name of the viable file is included at the top after two `//`
+- Larger code parts are written as below:
 
 ```
-// File Name
 
 Newly added code together with some older code to understand where the new code should be put in
 ```
@@ -26,7 +25,7 @@ Newly added code together with some older code to understand where the new code 
 - When Next.js concepts or other important words are mentioned, they are written in bold, as **Next.js Concept**
 
 - If there are some deeper explainations to either concepts or why, these are written as the citation shown below. These can be skipped depending on how much in detail you want to go.
-  > Example explaination of a concept
+  > Example explanation of a concept
 
 ---
 
@@ -36,18 +35,25 @@ The technologies that we will be using in this project is TypeScript for both ba
 
 ### 0.3 Download the repo and start the application
 
-If you haven't already, please download the repo from [Github](https://github.com/LovreB/tech-bootcamp-ws)
+If you haven't already, please clone the repo from [Github](https://github.com/LovreB/tech-bootcamp-ws), by:
+
+- `git clone https://github.com/LovreB/tech-bootcamp-ws.git`
+- `cd tech-bootcamp-ws`
 
 To start the application you need to run:
 
 - `npm install` - installing everything that is needed
 - `npm run dev` - starts the application
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. At this stage, it is only a title and two texts which will be your movies.
 
 ### 0.4 Problems running the application?
 
-Make sure you have a node version >=18.18.0
+Make sure you have a node version >=18.18.0 - this can be checked by:
+
+- `node -v`
+
+If you have a lower version, raise your hand and a coach will help you.
 
 # Frontend Path
 
@@ -60,9 +66,10 @@ Some tips to get maximal value out of the workshop:
 
 ## 0. Getting stared Frontend path
 
-1. If you haven't already, go to [OMDB API](https://www.omdbapi.com/apikey.aspx?__EVENTTARGET=freeAcct&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFgICBw8WAh4HVmlzaWJsZWhkAgIPFgIfAGhkAgMPFgIfAGhkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBQtwYXRyZW9uQWNjdAUIZnJlZUFjY3QFCGZyZWVBY2N0oCxKYG7xaZwy2ktIrVmWGdWzxj%2FDhHQaAqqFYTiRTDE%3D&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAU%2BO86JjTqdg0yhuGR2tBukmSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYpioiDjxFjSdCQfbG0SWduXFd8BcWGH1ot0k0SO7CfuulHLL4j%2B3qCcW3ReXhfb4KKsSs3zlQ%2B48KY6Qzm7wzZbR&at=freeAcct&Email=) to retrieve your api key (use the FREE variant).
-2. Check out the `frontend` branch - this has already implemented all API endpoints, but lack the frontend components.
-3. Rename the `.env.sample` file to `.env`, and fill in the values as follows:
+1. If you haven't already, go to [OMDB API](https://www.omdbapi.com/apikey.aspx?__EVENTTARGET=freeAcct&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFgICBw8WAh4HVmlzaWJsZWhkAgIPFgIfAGhkAgMPFgIfAGhkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBQtwYXRyZW9uQWNjdAUIZnJlZUFjY3QFCGZyZWVBY2N0oCxKYG7xaZwy2ktIrVmWGdWzxj%2FDhHQaAqqFYTiRTDE%3D&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAU%2BO86JjTqdg0yhuGR2tBukmSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYpioiDjxFjSdCQfbG0SWduXFd8BcWGH1ot0k0SO7CfuulHLL4j%2B3qCcW3ReXhfb4KKsSs3zlQ%2B48KY6Qzm7wzZbR&at=freeAcct&Email=) to retrieve your OMDB api key (use the FREE variant).
+2. Check out the `frontend-base` branch - this has already implemented all API endpoints, but lack the frontend components.
+3. Re-run `npm install`
+4. Rename the `.env.sample` file to `.env`, and fill in the values as follows:
 
 - _OMDB_API_KEY_ - the api key you have retrieved from OMDB
 - _DATABASE_URL_ - Set db url as postgresql://<firstname>.<first-letter-of-last-name>:<password>@34.7.50:5432/postgres, where password will be retrieved in the workshop.
@@ -135,7 +142,7 @@ To invoke javascript into the markup, you need to contain the variable in curly 
 
 As told earlier, we are using Tailwind CSS for our styling (CSS).
 
-> [Tailwind CSS](https://tailwindcss.com/) is a utility based CSS framework, where you build up your stylings by adding multiple CSS classes to your markup, where each class only sets one thing, such as `m-8` sets a margin of `8px`.
+> [Tailwind CSS](https://tailwindcss.com/) is a utility based CSS framework, where you build up your stylings by adding multiple CSS classes to your markup, where each class only sets one thing, such as `m-8` sets a margin of `8px`. If you are just to google `width tailwind css` and you often get what alternatives there are and good explainations on how it works.
 
 When styling html tags in React, we are using `className` instead of `class`. Example:
 
@@ -149,10 +156,6 @@ When styling html tags in React, we are using `className` instead of `class`. Ex
 
 Let the creativity flow with the styling, but don't put too much time on it :)
 
-### 1.2 (Enhancements)
-
-**Task**: Extend the props and MovieCard to also show a description and other attributes available in the `Movie` type.
-
 ## 2. Search for movie
 
 ... but wouldn't it be more fun if it was YOUR favorite movies that were shown here? Next part will allow us to search, and find, your faviourite movies!
@@ -162,10 +165,9 @@ But first, let us understand the index page. In Next.js, the file `app/page.tsx`
 ```
 {movies.map((movie) => (
   <MovieCard
+    key={movie.imdbId} /* key is needed in React when mapping items - not part of component props */
     title={movie.title}
-    backgroundImg={movie.img}
-    key={movie.imdbId}
-    isFavorite={movie.isFavorite}
+    img={movie.img}
   />
 ))}
 ```
@@ -188,7 +190,7 @@ In React, when we want to share and maintain a value used between components clo
 
 > A [React hook](https://react.dev/learn#using-hooks) is like a tool that lets you add special features (like state and side effects) to your React components.
 
-The `useState` hook returns two variables - one that contains the value, and one that is a function that updates the state. It can be used like:
+The `useState` hook returns two variables - one that contains the value (the state variable), and one that is a function that updates the state variable. It can be used like:
 
 ```
   const [myState, setMyState] = useState(0); // 0 is the initial value in the state
@@ -207,7 +209,7 @@ export const MyComponent = () => {
 }
 ```
 
-**Task:** When the user writes in the input field, save the value in a state.
+**Task:** When the user writes in the input field, save the value in a state variable - i.e, when you write a movie title in the field, your state variable should update to that title.
 
 To perform an action in code when the user performs an action, we can use the `onClick` attribute to buttons. `onClick` takes in a function, that is performed when the button is clicked, like:
 
@@ -224,7 +226,7 @@ To perform an action in code when the user performs an action, we can use the `o
 
 ```
 
-**Task:** When the user clicks on the search button, call the method `fetchMovies` with the input value. This is where we in the next step will fetch the movies!
+**Task:** When the user clicks on the search button, call the method `getMovies` which is defined in `app/data/getMovies.ts` with the input value. This method will log your input value, and where we in the next step will fetch the movies!
 
 ### 2.3 Use BFF
 
@@ -242,9 +244,9 @@ To fetch something from our frontend, we can use the method `fetch` which is ava
 
 ```
 
-**Task:** Update the `fetchMovies` function so that it calls our api backend instead of logging to the console. Hint: The available endpoints and what data to send are defined in the section [Getting Started](#0-getting-stared-frontend-path).
+**Task:** Update the `gethMovies` function so that it calls our api backend instead of logging to the console. Hint: The available endpoints and what data to send are defined in the section [Getting Started](#0-getting-stared-frontend-path).
 
-**Task:** Use the return value you get from `fetchMovies` and update the `movies` variable in `page.tsx`. Hint: How do we set state?
+**Task:** Use the return value you get from `gethMovies` and update the `movies` variable in `page.tsx`. Hint: How do we set state?
 
 ### 2.4 (Enhancements)
 
@@ -270,11 +272,24 @@ Next step is to add the possibility to select favorite movies!
 
 In the `Movie` type, we have one attribute `isFavorite`, that that defines if you have marked this movie as favorite - this is something we can use in our Movie Cards when displaying the movie.
 
+If you want to do conditional rendering in react, you can specify in the markup as:
+
+```
+  return (
+    <>
+      {isTrue ? (
+        <div>Div that shows when true</div>
+       ) : (
+        <div>Div that shows when false</div>
+      )}
+    </>;
+```
+
 > To use assets (images / icons etc) in Next.js, you need to add your picture to the `public` folder. once there, it will be available to use in `<img>` components by defining `<img src=/your-image-name.png`. You will likely be prompted to use a NextImage, but you can in this workshop just as well use normal `<img>` tag.
 
-**Task**: Add the prop `isFavorite` to your MovieCard.tsx component, and display in the card if the movie is your favorite or not.
+**Task**: Add the prop `isFavorite` to your MovieCard.tsx component, and display in the card if the movie is your favorite or not. There are two heart-icons prepared in the `public` folder, `favorite-checked.png` and `favorite-unchecked.png`, which you can use if you want to - but not necessary.
 
-To not only display, but also be able to change the favorite status, we need a mechanism for that! To make it easier for you, we have prepared a method `addToFavorites` which calls the api endpoint `/users/{userId}/favorites/{movieId}` that adds a movie to the favorites. Use that function, or implement your own.
+To not only display, but also be able to change the favorite status, we need a mechanism for that! To make it easier for you, we have prepared a method `addFavorite` in `app/data/addFavorite.ts`. This method calls the api endpoint `/users/{userId}/favorites/{movieId}`, that adds a movie as your favorite. Use that function, or implement your own.
 
 **Task**: Add a button to your MovieCard, that on click, calls the method `addToFavorites` with the `imdbId`. Give the user some feedback that favorite has been added.
 

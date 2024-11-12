@@ -28,17 +28,20 @@ export default function Home() {
   const [movies, setMovies] = useState<Movie[]>(defaultMovies);
 
   return (
-    <MovieCardGrid>
-      {/* The MovieCardGrid component lay out its children in a grid. Feel free to change  */}
-      {movies.map((movie) => (
-        <MovieCard
-          key={
-            movie.imdbId
-          } /* key is needed in React when mapping items - not part of component props */
-          title={movie.title}
-          img={movie.img}
-        />
-      ))}
-    </MovieCardGrid>
+    <>
+      <h1>Welcome to tech bootcamp</h1>
+      <MovieCardGrid>
+        {/* The MovieCardGrid component lay out its children in a grid. Feel free to change  */}
+        {movies.map((movie) => (
+          <MovieCard
+            key={
+              movie.imdbId
+            } /* key is needed in React when mapping items - not part of component props */
+            title={movie.title}
+            img={movie.img}
+          />
+        ))}
+      </MovieCardGrid>
+    </>
   );
 }

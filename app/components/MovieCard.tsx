@@ -9,8 +9,13 @@ type MovieProps = {
 export const MovieCard = ({ title, img }: MovieProps) => {
   /* title and background is now available to use within your component */
 
-  /* The render function returns the html to render */
-  return <p>My movie card</p>;
+  /* The render function returns the html to render
+   * It can only return one html tag, so if there is multiple elements, these needs to be wrapped in an empty tag <></> */
+  return (
+    <>
+      <p>My movie card</p>;
+    </>
+  );
 };
 
 export default MovieCard;
