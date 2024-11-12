@@ -64,8 +64,8 @@ Some tips to get maximal value out of the workshop:
 2. Rename the `.env.sample` file to `.env`, and fill in the values as follows:
 
 - _OMDB_API_KEY_ - the api key you have retrieved from OMDB
-- _DATABASE_URL_ - Set db url as postgresql://yourFirstname.yourLastname:password.38.7.50:5432/postgres, where password will be retrieved in the workshop.
-- _NEXT_PUBLIC_USERNAME_ - set username as yourFirstname.yourLastname
+- _DATABASE_URL_ - Set db url as postgresql://<firstname>.<first-letter-of-last-name>:<password>@34.38.7.50:5432/postgres, where password will be retrieved in the workshop.
+- _NEXT_PUBLIC_USERNAME_ - set username as <firstname>.<first-letter-of-last-name>
 
 Password will be retrieved in the workshop.
 
@@ -367,7 +367,7 @@ TABLE favorites (
     FOREIGN KEY (movie_id) REFERENCES movies(id)
 );
 ```
-Where `Users` is a prepped table containing all of us. The id for each user is `<your-firstname>.<first-letter-of-your-last-name>`. This is
+Where `Users` is a prepped table containing all of us. The id for each user is `<firstname>.<first-letter-of-last-name>`. This is
 the table that will be used when you log in with your name in the frontend.
 `Movies` will contain all movies marked as favorites, and `Favorites` is a table that connects users with their favorite movies.
 
@@ -409,7 +409,7 @@ Your password will be given to you during the workshop.
 
 ```markdown
 # DB CONNECTION
-DATABASE_URL=postgresql://<your-firstname>.<first-letter-of-your-last-name>:<password>@34.38.7.50:5432/postgres
+DATABASE_URL=postgresql://<firstname>.<first-letter-of-last-name>:<password>@34.38.7.50:5432/postgres
 ```
 To test your database connection, you can run Prisma Studio with the command:
 ```bash
@@ -448,11 +448,11 @@ GET api/users/{id}
 ```
 Open a new terminal and try curling the endpoint with your own id:
 ```bash
-curl -X GET "http://localhost:3000/api/users/<your-firstname>.<first-letter-of-your-last-name>"
+curl -X GET "http://localhost:3000/api/users/<firstname>.<first-letter-of-last-name>"
 ```
 This should return a user object with your name
 ```bash
-{"user":{"id":<your-firstname>.<first-letter-of-your-last-name>}}
+{"user":{"id":<firstname>.<first-letter-of-last-name>}}
 ```
 Now everything seems to work and we are ready to start coding! 🚀
 
@@ -508,7 +508,7 @@ the path of the endpoint. The `GET` function is the handler for the GET request 
 To verify that the endpoint works, we can `curl` it in the terminal. Make sure you still have your
 server running, and call the endpoint using
 ```bash
-curl -X GET http://localhost:3000/api/movies?title=star&userId=<your-firstname>.<first-letter-of-your-last-name>
+curl -X GET http://localhost:3000/api/movies?title=star&userId=<firstname>.<first-letter-of-last-name>
 ```
 this should return a list of movies with the word "star" in the title.
 
