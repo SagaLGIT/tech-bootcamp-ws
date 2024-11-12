@@ -328,11 +328,18 @@ To learn more about Next.js, take a look at the following resources:
 
 # Backend path
 ## 0 Getting started - prerequisites
+Begin with checking out the `backend-base` branch.
+``` 
+git pull
+git checkout backend-base
+```
 ### 0.1 Access to OMDB API
 In order to send requests to the OMDB API, you need to fetch an API-key. Go to the [OMDB API website](https://www.omdbapi.com/apikey.aspx?__EVENTTARGET=freeAcct&__EVENTARGUMENT=&__LASTFOCUS=&__VIEWSTATE=%2FwEPDwUKLTIwNDY4MTIzNQ9kFgYCAQ9kFggCAQ8QDxYCHgdDaGVja2VkZ2RkZGQCAw8QDxYCHwBoZGRkZAIFDxYCHgdWaXNpYmxlZ2QCBw8WAh8BaGQCAg8WAh8BaGQCAw8WAh8BaGQYAQUeX19Db250cm9sc1JlcXVpcmVQb3N0QmFja0tleV9fFgMFC3BhdHJlb25BY2N0BQhmcmVlQWNjdAUIZnJlZUFjY3TuO0RQYnwPluQ%2Bi0YJHNTcgo%2BfiAFuPZl7i5U8dCGtzA%3D%3D&__VIEWSTATEGENERATOR=5E550F58&__EVENTVALIDATION=%2FwEdAAV39P5KqwNGJgd%2F4UbyWCx3mSzhXfnlWWVdWIamVouVTzfZJuQDpLVS6HZFWq5fYpioiDjxFjSdCQfbG0SWduXFd8BcWGH1ot0k0SO7CfuulNNHYC5f864PBfygTYVt5wnDXNKUzugcOMyH4eryeeGG&at=freeAcct&Email=)
 and generate a FREE API key.
 
-When you have received the API key via e-mail, you can try using it in your terminal by fetching the titanic movie.
+When you have received the API key via e-mail, make sure you have **_activated it_** by clicking the link in the e-mail.
+
+Now you can try using it in your terminal by fetching the titanic movie.
 
 ```bash
 curl "http://www.omdbapi.com/?t=titanic&apikey=<API-KEY>"
@@ -360,7 +367,7 @@ TABLE favorites (
     FOREIGN KEY (movie_id) REFERENCES movies(id)
 );
 ```
-Where `Users` is a prepped table containing all of us. The id for each user is `<firstname>.<lastname>`. This is
+Where `Users` is a prepped table containing all of us. The id for each user is `<your-firstname>.<first-letter-of-your-last-name>`. This is
 the table that will be used when you log in with your name in the frontend.
 `Movies` will contain all movies marked as favorites, and `Favorites` is a table that connects users with their favorite movies.
 
@@ -386,6 +393,8 @@ This pattern is a design pattern that separates the different parts of a service
   Scalability: Permits scaling of specific layers to accommodate changing requirements.
 
 # 1 Configurations
+The file `.env.sample` shows an example of what your `.env` file should look like when you are done with
+the configurations. But for now, focus on the `.env` file.
 ## 1.0 Configure your personal OMDB API key and the URL
 Set the omdb url and your personal api key from 0.1 in the [.env](.env) file.
 ```markdown
@@ -439,7 +448,7 @@ GET api/users/{id}
 ```
 Open a new terminal and try curling the endpoint with your own id:
 ```bash
-curl -X GET http://localhost:3000/api/users/<your-firstname>.<first-letter-of-your-last-name>
+curl -X GET "http://localhost:3000/api/users/<your-firstname>.<first-letter-of-your-last-name>"
 ```
 This should return a user object with your name
 ```bash
@@ -517,7 +526,7 @@ movie titles from the OMDB API.
 ### 3.4.1 Types
 Since we are using TypeScript, we have the advantage of being able to type the response from the OMDB API.
 This helps us catch errors early and makes the code easier to read. We have already
-created a type `OmdbMovie` representing the movie object that we get from the OMDB API.
+created a type `OmdbMovie` in the `types` directory representing the movie object that we get from the OMDB API.
 ```typescript
 export type OmdbMovie = {
     "Title": string;
@@ -537,7 +546,7 @@ export type OmdbSearchResponse = {
     Response: string;         // "True" if the request was successful, otherwise "False"
 }
 ```
-We have also already created a type `Movie` representing the movie object that will e sent to the frontend.
+We have also already created a type `Movie` representing the movie object that will be sent to the frontend.
 ```typescript
 export type Movie = {
     /* Feel free to add more - så kan de själva välja i FE hur mycket detaljer de vill visa upp */
@@ -551,7 +560,9 @@ export type Movie = {
 This is what we call a DTO which stands for Data Transfer Object. It is a design pattern used to transfer
 data between software application subsystems. The idea of this is to encapsulate all information needed
 by the calling system, without the calling system having to make several calls. It also allows you to
-only transfer the data that is required rather than the entire domain object. Last of all, we also have a class
+only transfer the data that is required rather than the entire domain object.
+
+Last of all, we also have a class
 `InternalMovie` in `api/movies` that will be our domain object, i.e. the representation of a movie
 in our backend.
 ```typescript
@@ -651,7 +662,7 @@ class OmdbClient {
         return {} as OmdbSearchResponse;
       }
     } catch (error) {
-      console.error('Error fetching movie by title from OMDb:', error);
+      console.error('Error fetching movie by title from OMDB:', error);
       throw new Error('Failed to fetch movie from OMDb');
     }
   }
@@ -716,17 +727,24 @@ class MovieService {
 Now we can try calling this method from the api movies route that we created
 ```typescript
 import {NextRequest, NextResponse} from "next/server";
-import {movieService} from "@/app/api/movies/movieService";
+import {movieService} from "@/app/api/movies/MovieService";
+import {Movie} from "@/app/types/Movie";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
-    const partialTitle = request.nextUrl.searchParams.get("title")
-    if (!partialTitle) {
-        return NextResponse.json({ error: "Missing title query parameter" }, { status: 400 });
-    }
-    const matchingMovies = await movieService.searchByTitle(partialTitle); // <--- HERE
-    return NextResponse.json(matchingMovies); // <--- AND RETURNING HERE
+  const partialTitle = request.nextUrl.searchParams.get("title")
+  const userId = request.nextUrl.searchParams.get("userId");
+  if (!partialTitle) { // <--- Some added error handling
+    return NextResponse.json({ error: "Missing title query parameter" }, { status: 400 });
+  }
+  if (!userId) {
+    return NextResponse.json({ error: "Missing userId query parameter" }, { status: 400 });
+  }
+  const matchingMovies: Movie[] = await movieService.searchByTitle(partialTitle, userId); // <--- HERE
+  return NextResponse.json(matchingMovies); // and returning here
 }
 ```
+If you do not set the response status yourself, the NextResponse will default to 200 OK.
+
 ### 3.4.4 Verify the endpoint response
 Curl the endpoint in the terminal to see if it works
 ```bash
@@ -759,7 +777,8 @@ to that specific user.
 
 ### 3.5.2 Add the POST method for the API route for favorites
 In the file `app/api/users/[userId]/favorites/[imdbId]/route.ts`, we already have a DELETE endpoint setup
-for deleting favorites, and now we want to be able to POST favorites as well. Add the following function
+for deleting favorites, and now we want to be able to POST favorites as well. Note that this is
+another route than the one we edited earlier (different path). Add the following function
 to the route:
 ```typescript
 export async function POST(request: NextRequest, context: { params: { userId: string, imdbId: string} }): Promise<NextResponse> {
@@ -771,6 +790,8 @@ export async function POST(request: NextRequest, context: { params: { userId: st
   return NextResponse.json({ movieDto }, { status: 201 });
 }
 ```
+Note here that we set status `201 Created` when we have successfully added a favorite. This is a common
+practice when you create a new resource in a RESTful API.
 
 ### 3.5.3 Add the addFavorite method in the favoriteService
 In the `app/api/favorites/favoriteService.ts` file, we will add the method `addFavorite` that will add a favorite.
@@ -831,6 +852,8 @@ class FavoriteRepository {
 Now you can go to the frontend again and try searching for and liking a movie. Clicking "Go to my favorites"
 and you should see the movie you liked in your favorites list. Hurray! 🎉
 
+Now go ahead and search and like your favorite movies!! 🚀
+
 ## What you have learnt
 In this workshop, you have touched many of the techniques and patterns
 that backend developers use in modern development today. The principles and techniques we have used are:
@@ -850,7 +873,8 @@ your feedback. Looking forward to hearing from you!
 
 ## Future work
 If you want to continue working on this outside of this workshop,
-we suggest you exchange the cloud database with a local database.
+we suggest you exchange the cloud database with a local database as the common
+database we have used in this workshop will be deleted.
 We suggest running a PostgreSQL database in a docker container locally
 using docker desktop. You can find the docker image for PostgreSQL at
 [hub.docker.com](https://hub.docker.com/_/postgres).
