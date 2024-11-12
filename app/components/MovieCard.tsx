@@ -13,7 +13,7 @@ export const MovieCard = ({ title, img }: MovieProps) => {
    * It can only return one html tag, so if there is multiple elements, these needs to be wrapped in an empty tag <></> */
   return (
     <>
-      <p>My movie card</p>;
+      <p>My movie card</p>
     </>
   );
 };
