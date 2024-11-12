@@ -45,7 +45,7 @@ To start the application you need to run:
 - `npm install` - installing everything that is needed
 - `npm run dev` - starts the application
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. At this stage, it is only a title and two texts which will be your movies.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result. At this stage, it is only a title and two texts which will be your movies on a red background.
 
 ### 0.4 Problems running the application?
 
