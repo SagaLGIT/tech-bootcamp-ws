@@ -65,8 +65,8 @@ Some tips to get maximal value out of the workshop:
 3. Rename the `.env.sample` file to `.env`, and fill in the values as follows:
 
 - _OMDB_API_KEY_ - the api key you have retrieved from OMDB
-- _DATABASE_URL_ - Set db url as postgresql://yourFirstname.yourLastname:password.38.7.50:5432/postgres, where password will be retrieved in the workshop.
-- _NEXT_PUBLIC_USERNAME_ - set username as yourFirstname.yourLastname
+- _DATABASE_URL_ - Set db url as postgresql://<firstname>.<first-letter-of-last-name>:<password>@34.7.50:5432/postgres, where password will be retrieved in the workshop.
+- _NEXT_PUBLIC_USERNAME_ - set username as <firstname>.<first-letter-of-last-name>
 
 Password will be retrieved in the workshop.
 

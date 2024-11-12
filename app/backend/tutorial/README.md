@@ -31,7 +31,7 @@ TABLE favorites (
     FOREIGN KEY (movie_id) REFERENCES movies(id)
 );
 ```
-Where `Users` is a prepped table containing all of us. The id for each user is `<firstname>.<lastname>`. This is
+Where `Users` is a prepped table containing all of us. The id for each user is `<firstname>.<first-letter-of-last-name>`. This is
 the table that will be used when you log in with your name in the frontend.
 `Movies` will contain all movies marked as favorites, and `Favorites` is a table that connects users with their favorite movies.
 
@@ -154,7 +154,7 @@ export async function GET(request: Request): Promise<NextResponse> {
 To verify that the endpoint works, we can `curl` it in the terminal. Make sure you still have your 
 server running, and call the endpoint using
 ```bash
-curl -X GET http://localhost:3000/api/movies?title=star&userId=<your-firstname>.<first-letter-of-your-last-name>
+curl -X GET http://localhost:3000/api/movies?title=star&userId=<your-firstname>.<first-letter-of-lastname>
 ```
 this should return a list of movies with the word "star" in the title.
 
